@@ -1,6 +1,11 @@
 Feature: Login Functionality
 
-Scenario: Successful login with valid credential
+Scenario: Successful login with valid credentials
   Given user is on the login page
-  When user enter correct credential
+  When user enters valid credential
   Then user is directed to the homepage
+  
+Scenario: Unsuccessful login with invalid credentials
+  Given user is on the login page
+  When user enters invalid credential
+  Then user sees the error message
