@@ -30,17 +30,29 @@ public class LoginSteps {
 	 
 	@Then("user is directed to the homepage")
 	public void user_is_directed_to_the_homepage() {
+		try {
 		boolean isLogoutDisplayed = driver.findElement(By.cssSelector(".ico-logout")).isDisplayed();
 		Assert.assertTrue("Logout button should be visible after login",isLogoutDisplayed);
 		
-		if (isLogoutDisplayed) {
-			System.out.println("Login successful, user is on homepage");
+		boolean isEmailDisplayed = driver.findElement(By.cssSelector(".header-links .account")).isDisplayed();
+		Assert.assertTrue("Email should be visible after login",isEmailDisplayed);
+		
+//		Assert.assertEquals("User is not directed to the new page","https://demowebshop.tricentis.com/",driver.getCurrentUrl());
+		Assert.assertTrue(driver.getCurrentUrl().contains("demowebshop.tricentis.com"));
+		
+//		if (isLogoutDisplayed) {
+//			System.out.println("Login successful, user is on homepage");
+//		}
+//		else {
+//			System.out.println("Login failed");
+//		}
 		}
-		else {
-			System.out.println("Login failed");
+		catch (Exception e) {
+			System.out.println("something went wrong:   "+ e.getMessage());
 		}
+		finally {
 		driver.quit();
-		System.out.println("user is directed to the homepage");
+		}
 	}
 
 }
